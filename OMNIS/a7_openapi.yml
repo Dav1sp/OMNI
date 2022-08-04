@@ -1,0 +1,878 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: 'LBAW OMNIS Web API'
+  description: 'Web Resources Specification (A7) for OMNIS'
+
+servers:
+  - url: http://lbaw.fe.up.pt
+    description: Production server
+
+tags:
+  - name: 'M01: Authentication and Individual Profile'
+  - name: 'M02: Post'
+  - name: 'M03: Vote'
+  - name: 'M04: Comment'
+  - name: 'M04: Favorite e Repost'
+  - name: 'M05: User Administration'
+  - name: 'M06: Static Pages'
+
+paths:
+  /Login:
+    get:
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      operationId: R101
+      summary: ' R101: Login form'
+      description: 'Login form. Access: PUB'
+      responses:
+        '200':
+          description: 'Successful operation. Show Log-in UI'
+        '400':
+          description: 'Invalid username/password supplied'
+  /Login/Send:
+    post:
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      operationId: R102
+      summary: 'R102: Login action'
+      description: 'Login form submission. Access: PUB'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               email:          
+                 type: string
+               password:   
+                 type: string
+             required:
+                  - email
+                  - password
+      responses:
+       '302':
+         description: 'Redirect after processing the login credentials.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to user profile.'
+                 value: '/user/{id}'
+               302Error:
+                 description: 'Failed authentication. Redirect to login form.'
+                 value: '/user/login'
+  /Logout:
+    post:
+     tags:
+        - 'M01: Authentication and Individual Profile'
+     operationId: R103
+     summary: 'R103: Logout'
+     description: 'Logout the current authenticated user. Access: USR, ADM'
+     responses:
+       '302':
+         description: 'Redirect after logout.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful logout. Redirect to login form.'
+                 value: '/user/login'
+  /Register:
+    get:
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      operationId: R104
+      summary: 'R104: Register form'
+      description: 'Registration form for new user. Access: PUB'
+      responses:
+       '200':
+         description: 'Ok. Show Sign-Up UI'
+  /Register/Send:
+    post:
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      operationId: R105
+      summary: 'R105: Register action'
+      description: 'Processes the new user registration form submission.  Access: PUB'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                picture:
+                  type: string
+                  format: binary
+              required:
+                  - email
+                  - password
+      responses:
+        '302':
+          description: 'Redirect after processing the new user information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to user profile.'
+                  value: '/user/{id}'
+                302Failure:
+                  description: 'Failed authentication. Redirect to login form.'
+                  value: '/user/login'
+  /user/{id}:
+    get:
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      operationId: R106
+      summary: 'R106: Show user profile'
+      description: 'Show user profile. Access: USR'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation.Show User Profile UI
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+    put:
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      operationId: R107
+      summary: 'R107: Update user'
+      description: 'Update User. Access: USR'
+      parameters:
+        - name: id
+          in: path
+          description: 'id of the user that need to be updated'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
+    delete:
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      operationId: R108
+      summary: 'R108: Delete user'
+      description: 'Delete a user account. Access: USR'
+      parameters:
+        - name: id
+          in: path
+          description: 'Id of the user to be deleted'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+  /post:
+    post:
+      tags:
+        - 'M02: Post'
+      operationId: R201
+      summary: 'R201: New post'
+      description: 'Create a new post. Access: USR'
+      requestBody:
+        required: true
+        description: 'Post to be added'
+        content:
+          application/json:
+            schema:    
+              type: object
+              properties: 
+                    postId:
+                      type: integer
+                      format: int64
+                    categoryId:
+                      type: integer
+                      format: int64
+                    ownerId:
+                      type: integer
+                      format: int64
+                    totalUp:
+                      type: integer
+                      format: int64
+                    totalDown:
+                      type: integer
+                      format: int64
+                    title:
+                      type: string
+      responses:
+        '200':  
+          description: 'New Post created successfully!'
+          content:
+            application/json:
+              schema:    
+                type: object
+                properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string
+        '401':
+          description: 'Not authorized'
+    
+  /post/{postId}:
+    get:
+      tags:
+        - 'M02: Post'
+      operationId: R202
+      summary: 'R202: Find post - id'
+      description: 'Find a post by its Id. Access: PUB'
+      parameters:
+      - name: postId
+        in: path
+        description: 'Id of the post to be found'
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Post found!'
+          content:
+            application/xml:
+              schema:    
+                type: object
+                properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string  
+        '400':
+              description: 'Invalid ID'
+        '404':
+              description: 'Not found'
+    patch:
+      tags:
+        - 'M02: Post'
+      operationId: R203
+      summary: 'R203: Edit a post'
+      description: 'Edit a post. Access: OWN'
+      parameters:
+      - name: postId
+        in: path
+        description: 'Post ID'
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:    
+              type: object
+              properties: 
+                    postId:
+                      type: integer
+                      format: int64
+                    categoryId:
+                      type: integer
+                      format: int64
+                    ownerId:
+                      type: integer
+                      format: int64
+                    totalUp:
+                      type: integer
+                      format: int64
+                    totalDown:
+                      type: integer
+                      format: int64
+                    title:
+                      type: string
+      responses:
+        '200':  
+          description: 'Post edited successfully!'
+          content:
+            application/json:
+              schema:    
+                type: object
+                properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string
+        '401':
+          description: 'Not authorized'
+    delete:
+      tags:
+        - 'M02: Post'
+      operationId: R204
+      summary: 'R204: Delete a post'
+      description: 'Delete a post. Access: OWN, ADM'
+      parameters:
+      - name: postId
+        in: path
+        description: 'Post ID'
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':  
+          description: 'Post deleted successfully!'
+          content:
+            application/json:
+              schema:    
+                type: object
+                properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string
+        '401':
+          description: 'Not authorized'
+  /post/{title}:
+    get:
+      tags:
+        - 'M02: Post'
+      operationId: R205
+      summary: 'R205: Find post - title'
+      description: 'Find a post bt its title. Access: USR'
+      parameters:
+      - name: title
+        in: path
+        description: 'Title of the Post to be found'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':  
+          description: 'Post found successfully!'
+          content:
+            application/json:
+              schema:    
+                type: object
+                properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string
+        '400':
+              description: 'Invalid Name'
+        '401':
+          description: 'Not authorized'
+        '404':
+              description: 'Not found'
+  
+  /post/{category}:
+     get:
+      tags:
+        - 'M02: Post'
+      operationId: R206
+      summary: 'R206: Find post - category'
+      description: 'Find a post bt its category. Access: USR'
+      parameters:
+      - name: category
+        in: path
+        description: 'Category of the Post to be found'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':  
+          description: 'Post found successfully!'
+          content:
+            application/json:
+              schema:    
+                type: object
+                properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string
+        '400':
+              description: 'Invalid category'
+        '401':
+          description: 'Not authorized'
+        '404':
+              description: 'Not found'
+  /user/{id}/post:
+    get:
+      tags:
+        - 'M02: Post'
+      operationId: R207
+      summary: 'R207: Find user posts'
+      description: 'Get the posts of the specified user. Access: USR'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Returns all of the posts of the user'
+          content:
+            application/json:
+              schema:    
+                type: array
+                items:
+                  type: object
+                  properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string
+        '400':
+          description: 'Invalid request'
+  /user/{id}/post/{postId}:
+    get:
+      tags:
+        - 'M02: Post'
+      operationId: R208
+      summary: 'R208: Find user specific post.'
+      description: 'Get a single post from ther user. Access: USR'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ' Returns the individual post'
+          content:
+            application/json:
+              schema:    
+                type: array
+                items:
+                  type: object
+                  properties: 
+                      postId:
+                        type: integer
+                        format: int64
+                      categoryId:
+                        type: integer
+                        format: int64
+                      ownerId:
+                        type: integer
+                        format: int64
+                      totalUp:
+                        type: integer
+                        format: int64
+                      totalDown:
+                        type: integer
+                        format: int64
+                      title:
+                        type: string
+        '400':
+          description: Invalid request
+          content:
+            'application/json':
+              schema:
+                type: string
+  /post/vote:
+    post:
+      tags:
+          - 'M03: Vote'
+      operationId: R0301
+      summary: 'R0301: Vote on post.'
+      description: 'Vote on a post. Access: USR'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: boolean
+                  example: true
+                userId:
+                  type: integer
+                  description: ' ID of the user that voted on the post'
+                  example: '852478526985'
+                postId:
+                  type: string
+                  description: 'ID of the post that was voted'
+                  example: '5252555'
+        required: true
+      responses:
+        '200':
+          description: 'Post voted'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: boolean
+                    example: true
+                  userId:
+                    type: integer
+                    example: '852478526985'
+                  postId:
+                    type: string
+                    example: '5252555'
+        '500':
+          description: 'Happens when an internal error has occurred'
+  /comment/vote:
+    post:
+      tags:
+          - 'M03: Vote'
+      operationId: R0302
+      summary: 'R0302: Vote on comment.'
+      description: 'Vote on a comment. Access: USR'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: boolean
+                  example: true
+                userId:
+                  type: integer
+                  description: ' ID of the user that voted on the comment'
+                  example: '7002985'
+                commentId:
+                  type: string
+                  description: 'ID of the commment that was voted'
+                  example: '368741'
+        required: true
+      responses:
+        '200':
+          description: 'Comment voted'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: boolean
+                    example: true
+                  userId:
+                    type: integer
+                    example: '7002985'
+                  commentId:
+                    type: string
+                    example: '368741'
+        '500':
+          description: 'Happens when an internal error has occurred'  
+
+  /post/comment:
+    post:
+      tags:
+        - 'M04: Comment'
+      operationId: R401
+      summary: 'R401: Create comment on post.'
+      description: 'Create comment on post. Access: USR'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: integer
+                  description: 'Content of the Comment'
+                  example: 'Great Post!!'
+                userId:
+                  type: integer
+                  description: ' ID of the user that made the comment'
+                  example: '852478526985'
+                postId:
+                  type: string
+                  description: 'ID of the post related with the Comment'
+                  example: '5252555'
+        required: true
+      responses:
+        '201':
+          description: 'Create comment on publication'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  commentId:
+                    type: integer
+                    example: '1458566'
+                  text:
+                    type: string
+                    example: 'Great Post!!'
+                  userId:
+                    type: integer
+                    example: '852478526985'
+                  postId:
+                    type: integer
+                    example: '5252555'
+        '500':
+          description: 'Happens when an internal error has occurred'
+          
+  /post/{postId}/comment:
+    get:
+      tags:
+        - 'M04: Comment'
+      operationId: R0402
+      summary: 'R0402: Get comments by post.'
+      description: 'Get comments by post id. Acess: USR'
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Returns all comments by post id'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  commentId:
+                    type: integer
+                    example: '1458566'
+                  text:
+                    type: string
+                    example: 'Great Post!!'
+                  userId:
+                    type: integer
+                    example: '852478526985'
+                  postId:
+                    type: integer
+                    example: '5252555'
+        '500':
+          description: 'Happens when an internal error has occurred'    
+  /admin/user/{id}:
+    get:
+      tags: 
+        - 'M05: User Administration'
+      operationId: R501
+      summary: 'R501: List all users'
+      description: 'View a list of all users. Access: ADM'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: 'Ok. Show users list'
+        '404':
+            description: 'Not found.'
+    post:
+      tags: 
+        - 'M05: User Administration'
+      operationId: R502
+      summary: 'R502: Edit users info'
+      description: 'R502: Edit user information. Access: ADM'      
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  password:
+                    type: string        
+      responses:
+        '302':
+          description: 'Edit user info'
+          headers:
+            location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Success'
+                  value: /admin
+                302Error:
+                  description: 'Failure'
+                  value: /admin/user/{id}
+  /AboutUs:
+    get:
+        tags:
+          - 'M06: Static Pages'
+        operationId: R601
+        summary : 'R601: About Us'
+        description: 'Show about page. Access: PUB'
+        responses:
+          '200':
+            description: 'Ok. Show About Us page'
+          '404':
+            description: 'Not found.'
+  /FAQ:
+    get:
+      tags:
+        - 'M06: Static Pages'
+      operationId: R602
+      summary: 'R602: FAQs'
+      description: 'Show FAQs Page. Access: PUB'
+      responses:
+        '200':
+          description: 'Ok. Show FAQs Page.'
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object 
+                  properties:
+                    id:
+                      type: integer
+                    question:
+                      type: string 
+                    answer:
+                      type: string 
+                  example:
+                    - id: 1
+                      question: 'What can i post in OMNIS website.'
+                      answer: 'You can create news and post it.'
+        '404':
+          description: 'Not found'
+  /Contact:
+    get:
+      tags:
+        - 'M06: Static Pages'
+      operationId: R603
+      summary: 'R603: Contact Us'
+      description: 'Show contact us page. Access: PUB'      
+      responses:
+        '200':
+          description: 'Ok. Show Contact Us Page'
+        '404':
+          description: 'Not found.'
+  /Help:
+    get:
+      tags:
+        - 'M06: Static Pages'
+      operationId: R604
+      summary: 'R603: Help'
+      description: 'Show help page. Access: PUB'      
+      responses:
+        '200':
+          description: 'Ok. Show Help Page'
+        '404':
+          description: 'Not found.'

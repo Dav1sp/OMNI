@@ -1,0 +1,15 @@
+insert into lbaw2194.category (name) values ('Science and Tech');
+insert into lbaw2194.category (name) values ('Sports');
+insert into lbaw2194.category (name) values ('Music');
+insert into lbaw2194.category (name) values ('Fitness and Life Style');
+insert into lbaw2194.category (name) values ('World');
+insert into lbaw2194.category (name) values ('Portugal');
+insert into lbaw2194.category (name) values ('Food and Recipe');
+insert into lbaw2194.category (name) values ('Fashion');
+insert into lbaw2194.category (name) values ('Cinema');
+insert into lbaw2194.category (name) values ('Gamming');
+insert into lbaw2194.category (name) values ('Business');
+insert into lbaw2194.category (name) values ('COVID-19');
+insert into lbaw2194.category (name) values ('Home Decor');
+insert into lbaw2194.category (name) values ('Social');
+insert into lbaw2194.category (name) values ('Gossip');

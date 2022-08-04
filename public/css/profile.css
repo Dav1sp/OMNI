@@ -1,0 +1,70 @@
+.perfil {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center; 
+    align-items: center;
+    margin: 50px;
+    padding: 150px;
+    background-color: rgb(236, 234, 226);
+}
+
+
+.perfil h1{
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    color:#c7973d;
+    font-weight: bold;
+}
+
+
+.perfil h3{
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-top: 100px;
+    color:#c7973d;
+    font-weight: bold;
+}
+
+.perfil img{
+    height: 300px;
+    width: 300px;
+    position: static;
+}
+
+
+.info{
+    margin-top: 20px;
+    color: #333;
+    font-size: 25px;
+}
+
+.info ul{
+    padding: 0;
+    list-style: none;
+}
+
+.info li {
+    padding: 10px;;
+    display:inline;
+}
+
+
+.perfil a{
+    text-decoration: none;
+    color: #080808;
+}
+
+.perfil a:hover{
+    padding: 10px;
+    background-color: #c7973d;
+    cursor: pointer;
+}
+
+.perfil p{
+    flex-direction: row;
+    border: 3px dotted #4e4e50;
+    padding: 200px 400px ;
+    margin: 50px;
+}

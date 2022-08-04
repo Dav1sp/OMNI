@@ -1,0 +1,402 @@
+.fundo{
+  flex-flow: column nowrap;
+  justify-content: center; /* aligns on vertical for column */
+  align-items: center;
+}
+
+.register{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register-card{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 4px 5px 4px #4e4e50;
+}
+.register-card-descricao{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register-card-descricao-titulo{
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 2px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  color: #28282B;
+  border-bottom: 2px solid #DBB97C;
+}
+
+.register-card-descricao-paragrafo{
+  text-align: center;
+  padding-top: 20px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.register-card-buttons{
+  width: 100%;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom:20px;
+}
+.register-card-buttons-primeiro{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+}
+.register-card-buttons-name{
+  margin-top:10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.register-card-buttons-name label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.register-card-buttons-name input::placeholder{
+  color:whitesmoke;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+.register-card-buttons-name input{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+.register-card-buttons-email{
+  margin-top:10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.register-card-buttons-email label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.register-card-buttons-email input{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+.register-card-buttons-email input::placeholder{
+  color:whitesmoke;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.register-card-buttons-country{
+  margin-top: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.register-card-buttons-country label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.register-card-buttons-country select{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+.register-card-buttons-genre{
+  margin-top: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.register-card-buttons-genre label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.register-card-buttons-genre select{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+
+.register-card-buttons-birthday{
+  margin-top: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.register-card-buttons-birthday label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.register-card-buttons-birthday input{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+.register-card-buttons-password{
+  margin-top: 10px;
+  border-top:10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.register-card-buttons-password label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.register-card-buttons-password input{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+.register-card-buttons-password input::placeholder{
+  color:whitesmoke;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.register-card-send{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+.register-card-send-button{
+  background-color: #DBB97C;
+  color:28282B;
+  width: 120px;
+  height: 40px;
+  border-radius: 50px;
+  border:none;
+  box-shadow: 4px 5px 4px #4e4e50;
+}
+.register-card-send-button:hover{
+  background-color: #dbba7c79;
+  cursor: pointer;
+}
+
+.login{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-card{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+}
+.login-card-descricao{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-card-descricao-titulo{
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 2px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  color: #28282B;
+  border-bottom: 2px solid #DBB97C;
+}
+
+.login-card-descricao-paragrafo{
+  text-align: center;
+  padding-top: 20px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.login-card-credentials{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  width: 100%;
+}
+.login-card-buttons-email{
+  margin-top:10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.login-card-buttons-email label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.login-card-buttons-email input{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+.login-card-buttons-email input::placeholder{
+  color:whitesmoke;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+.login-card-buttons-password{
+  margin-top: 10px;
+  border-top:10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-bottom: 2px solid #DBB97C;
+}
+.login-card-buttons-password label{
+  font-weight: 400;
+  font-size: 18px;
+  color: #28282B;
+  letter-spacing: 2px;
+}
+.login-card-buttons-password input{
+  background-color: #28282B;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+}
+.login-card-buttons-password input::placeholder{
+  color:whitesmoke;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+.login-card-send{
+    padding-top:20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .login-card-send-button{
+    background-color: #DBB97C;
+    color:28282B;
+    width: 120px;
+    height: 40px;
+    border-radius: 50px;
+    border:none;
+    box-shadow: 4px 5px 4px #4e4e50;
+  }
+  .login-card-send-button:hover{
+    background-color: #dbba7c79;
+    cursor: pointer;
+  }
+
+.login-card-register{
+  padding-top:20px;
+  border-top: 2px solid #DBB97C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+.login-card-register a{
+    text-decoration:none;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: 400;
+    font-size: 18px;
+    color: #28282B;
+    letter-spacing: 2px;
+}
+.login-card-register a:hover{
+  text-decoration: underline 2px solid #DBB97C;
+}
+.last{
+  padding-bottom: 20px;
+}
