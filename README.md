@@ -1,5 +1,6 @@
 # lbaw2194
 * Project theme is "1. Collaborative news” and the name is OMNIS
+* The video name is lbaw2194.mkv
 
 ## Project membres:
 * Amanda Silva up201800698@edu.fe.up.pt
